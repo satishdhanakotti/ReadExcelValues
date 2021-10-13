@@ -55,7 +55,6 @@ public class TestExecution extends Base {
 		Thread.sleep(2000);
 		Actions act = new Actions(driver);
 		act.sendKeys(Keys.PAGE_DOWN).build().perform();
-		Assert.fail();
 	}
 
 	@Test (dependsOnMethods = {"ShipFrom"})
