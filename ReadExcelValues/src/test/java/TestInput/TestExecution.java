@@ -32,7 +32,6 @@ public class TestExecution extends Base {
 		
 		repo.userName().sendKeys(testData.get(0).get("UserName"));
 		repo.password().sendKeys(testData.get(0).get("Password"));
-		Assert.fail();
 		repo.login().click();
 
 		// Cookies
@@ -56,6 +55,7 @@ public class TestExecution extends Base {
 		Thread.sleep(2000);
 		Actions act = new Actions(driver);
 		act.sendKeys(Keys.PAGE_DOWN).build().perform();
+		Assert.fail();
 	}
 
 	@Test (dependsOnMethods = {"ShipFrom"})

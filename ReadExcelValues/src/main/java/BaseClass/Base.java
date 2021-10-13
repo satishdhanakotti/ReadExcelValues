@@ -20,6 +20,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
 public class Base {
 	
 	public static FileInputStream fis;
@@ -85,10 +88,25 @@ public class Base {
 		return testDataAllRows;
 	}
 	
-	public void getScreenshots(String MethodName, WebDriver driver) throws IOException {
+	public String getScreenshots(String MethodName, WebDriver driver) throws IOException {
 		TakesScreenshot ts = (TakesScreenshot)driver;
 		File srcFile = ts.getScreenshotAs(OutputType.FILE);
 		String Path = System.getProperty("user.dir")+"\\reports\\"+MethodName+".png";
 		FileUtils.copyFile(srcFile, new File(Path));
+		return Path;
+	}
+	
+public static ExtentReports getExtendReport() {
+		
+		//ExtentReports && ExtentSparkReporter
+		
+		String ReportPath = System.getProperty("user.dir")+"\\ExtentReports\\index.html";
+		ExtentSparkReporter reporter = new ExtentSparkReporter(ReportPath);
+		reporter.config().setReportName("E2E Testing");
+		reporter.config().setDocumentTitle("Test Results");
+		
+		ExtentReports extent = new ExtentReports();
+		extent.attachReporter(reporter);
+		return extent;
 	}
 }
